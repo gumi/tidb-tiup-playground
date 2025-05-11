@@ -22,6 +22,7 @@ RUN tiup install tikv:${TIDB_VERSION}
 RUN tiup install tidb:${TIDB_VERSION}
 RUN tiup install pd:${TIDB_VERSION}
 RUN tiup install grafana:${TIDB_VERSION}
+RUN tiup install prometheus:${TIDB_VERSION}
 RUN tiup install tiflash:${TIDB_VERSION}
 RUN tiup install playground:${PLAYGROUND_VERSION}
 
