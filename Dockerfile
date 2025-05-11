@@ -15,6 +15,8 @@ ENV PATH="/root/.tiup/bin:${PATH}"
 
 ARG TIDB_VERSION=v7.5.2
 ARG PLAYGROUND_VERSION=v1.16.2
+ENV TIDB_VERSION=${TIDB_VERSION}
+ENV PLAYGROUND_VERSION=${PLAYGROUND_VERSION}
 
 RUN tiup install tikv:${TIDB_VERSION}
 RUN tiup install tidb:${TIDB_VERSION}
@@ -26,7 +28,12 @@ RUN tiup install playground:${PLAYGROUND_VERSION}
 # Expose necessary ports
 # TiDB server port (for SQL clients)
 EXPOSE 4000
-# PD server port (for TiDB Dashboard, optional but recommended)
+# grafana port
+EXPOSE 3000
+# Dashboard port
 EXPOSE 2379
 
-CMD ["bash", "-c", "tiup playground ${TIDB_VERSION} --pd 1 --kv 1 --db 1 --tiflash 0 --host 0.0.0.0"]
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
