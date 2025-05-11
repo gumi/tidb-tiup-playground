@@ -59,7 +59,7 @@ jobs:
         context: .
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: ghcr.io/${{ github.repository_owner }}/tidb-tiup-playground-${{ steps.versions.outputs.tidb_version }}-${{ steps.versions.outputs.playground_version }}
+        tags: ghcr.io/${{ github.repository_owner }}/tiup-tidb-${{ steps.versions.outputs.tidb_version }}:${{ steps.versions.outputs.playground_version }}
         build-args: |
           TIDB_VERSION=${{ steps.versions.outputs.tidb_version }}
           PLAYGROUND_VERSION=${{ steps.versions.outputs.playground_version }}
